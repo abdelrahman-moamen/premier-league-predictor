@@ -1,4 +1,4 @@
-# Premier League Match Predictor — An Honest Evaluation
+# Premier League Match Predictor 
 
 I'm a medical student with zero prior coding or CS background. I wanted 
 to see if I could actually build and understand a working machine 
