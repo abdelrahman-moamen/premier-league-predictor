@@ -50,17 +50,18 @@ normally are.
 The fix: I added last season's points-per-game as a separate, stable 
 feature — giving the model an anchor for "this team's established level," 
 independent of a small, noisy current-season sample. Villa's predicted 
-finish improved from 16th (11.5 average position) to a more sensible 
-~13th-14th (11.5, wait — actually confirm your real before/after numbers 
-here), and their relegation risk dropped close to zero.
+average finishing position improved from 14.9 to 11.5, and their 
+relegation risk dropped close to zero — a real, measurable improvement, 
+even though their rank label stayed around 16th because of points 
+already lost in real matches earlier in the season.
 
 I also tried a more sophisticated version — blending last-season and 
 current-season form with a decay weight, to model "regression to the 
 mean" (the idea that strong teams with rough starts tend to recover). 
-It fixed Villa's case even further, but it measurably hurt the model's 
-overall accuracy on the test set (43.0% → 41.3%). I reverted it. Not 
-every well-reasoned idea makes the model better — testing beats intuition, 
-even your own.
+It pushed Villa's number even further, but it measurably hurt the 
+model's overall accuracy on the test set (43.0% → 41.3%). I reverted it. 
+Not every well-reasoned idea makes the model better — testing beats 
+intuition, even your own.
 
 ## Fixing the model's blind spot for draws
 The model was almost completely unable to predict draws — only 5-7% 
@@ -71,8 +72,10 @@ signals an even matchup, which tends to produce draws), and told the
 model during training to weight getting draws wrong more heavily.
 
 Draw recall jumped from ~7% to 23% — a real, multi-times improvement — 
-and overall accuracy improved alongside it (up to 43-45%, depending on 
-model type).
+and overall accuracy improved alongside it, up to 43-45% depending on 
+model type.
+
+![Confusion Matrix and Feature Importance](confusion_matrix.png)
 
 ## Checking for the obvious failure mode: memorization
 Before trusting any of this, I wanted to rule out the model just 
